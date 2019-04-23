@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
+import styles from './index.css'
 
-// import FormContainer from './components/FormContainer'
 
 class App extends Component {
 
     render() {
         return (
-            <div>
+            <div className={styles.div}>
                 This is webpack demo for react.
             </div>
         )

@@ -1,4 +1,5 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+
 var path = require('path');
 
 
@@ -19,41 +20,69 @@ module.exports = {
     // 
     module: {
         rules: [
+            // for react js files
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader'
+                use: {
+                    loader: "babel-loader"
+                }
+
+                // // 写法2
+                // use: [
+                //     "babel-loader"
+                // ]
+                // // 写法3
+                // use: [
+                //     {
+                //         loader: "babel-loader"
+                //     }
+                // ]
             },
-            // {
-            //     test: /\.html$/,
-            //     loader: 'html-loader'
-            // },
+
+            // for css files
             {
                 test: /\.css$/,
                 exclude: [/node_modules/],
                 use: [
-                    "style-loader", 
+                    "style-loader",
                     {
                         loader: "css-loader",
-                        options: { url: false, modules: true }
+
+                        // https://webpack.js.org/loaders/css-loader/#modules
+                        options: {
+                            url: false, 
+                            modules: true 
+                        }
+                    }
+                ],
+                
+            },
+
+            // for html files
+            {
+                test: /\.html$/,
+                use: [
+                    {
+                        loader: "html-loader",
+                        options: { minimize: true }
                     }
                 ]
             }
 
-
         ]
-
     },
 
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'src', 'index.html'),
+            template: "./src/index.html",
             filename: 'index.html'
-        })
+        }),
+        
+        // new MiniCssExtractPlugin({
+        //     filename: "[name].css",
+        //     chunkFilename: "[id].css"
+        //   })      
     ]
-
-
-
-
 
 }
