@@ -1,5 +1,7 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+var MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 var path = require('path');
 
 
@@ -45,18 +47,20 @@ module.exports = {
                 test: /\.css$/,
                 exclude: [/node_modules/],
                 use: [
-                    "style-loader",
+                    // https://webpack.js.org/plugins/mini-css-extract-plugin/#root
+                    // 打包是创建独立的css文件
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                    },
                     {
                         loader: "css-loader",
-
                         // https://webpack.js.org/loaders/css-loader/#modules
                         options: {
-                            url: false, 
-                            modules: true 
+                            url: false,
+                            modules: true
                         }
                     }
                 ],
-                
             },
 
             // for html files
@@ -78,11 +82,12 @@ module.exports = {
             template: "./src/index.html",
             filename: 'index.html'
         }),
-        
-        // new MiniCssExtractPlugin({
-        //     filename: "[name].css",
-        //     chunkFilename: "[id].css"
-        //   })      
+
+        new MiniCssExtractPlugin({
+            filename: "[name].css",
+            chunkFilename: "[id].css"
+        }),
+
     ]
 
 }
