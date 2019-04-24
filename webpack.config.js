@@ -21,6 +21,20 @@ module.exports = {
     //
     devtool: 'source-map',
 
+    devServer: {
+        // contentBase: path.join(__dirname, "dist"),
+        port: 9000,
+        host: '0.0.0.0',
+        headers: {
+            'X-Bear': 'ZHONG'
+        },
+        // hot: true,
+        inline: true,
+        open: true,
+        overlay: true,
+        stats: 'errors-only'
+    },
+
     // 
     module: {
         rules: [
@@ -51,7 +65,7 @@ module.exports = {
                 enforce: 'pre',
                 use: {
                     loader: 'eslint-loader',
-                    options: 
+                    options:
                     {
                         fix: true
                     }
