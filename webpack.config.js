@@ -100,9 +100,10 @@ module.exports = {
             filename: 'index.html'
         }),
 
+        // 将CSS文件独立成单个文件的插件
         new MiniCssExtractPlugin({
-            filename: '[name].css',
-            chunkFilename: '[id].css'
+            filename: '[name]_[hash:4].css',
+            chunkFilename: '[id]_[hash:4].css'
         }),
 
         // 清除前次打包文件的插件
