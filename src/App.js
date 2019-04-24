@@ -3,7 +3,11 @@ import styles from './index.css'
 
 class App extends Component {
     render() {
-        return <div className={styles.div}>This is webpack demo for react.</div>
+        return (
+            <div className={styles.div}>
+                This is webpack demo for react.
+            </div>
+        )
     }
 }
 

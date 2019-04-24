@@ -4,7 +4,7 @@ var PrettierPlugin = require('prettier-webpack-plugin')
 var CleanWebpackPlugin = require('clean-webpack-plugin')
 
 
-var path = require('path');
+var path = require('path')
 
 
 module.exports = {
@@ -29,7 +29,7 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: "babel-loader"
+                    loader: 'babel-loader'
                 }
 
                 // // 写法2
@@ -44,6 +44,21 @@ module.exports = {
                 // ]
             },
 
+            {
+                test: /\.(js|jsx)$/,
+                // include: [path.join(__dirname, 'src')],
+                exclude: /node_modules/,
+                enforce: 'pre',
+                use: {
+                    loader: 'eslint-loader',
+                    options: 
+                    {
+                        fix: true
+                    }
+                }
+
+            },
+
             // for css files
             {
                 test: /\.css$/,
@@ -55,7 +70,7 @@ module.exports = {
                         loader: MiniCssExtractPlugin.loader,
                     },
                     {
-                        loader: "css-loader",
+                        loader: 'css-loader',
                         // https://webpack.js.org/loaders/css-loader/#modules
                         options: {
                             url: false,
@@ -70,7 +85,7 @@ module.exports = {
                 test: /\.html$/,
                 use: [
                     {
-                        loader: "html-loader",
+                        loader: 'html-loader',
                         options: { minimize: true }
                     }
                 ]
@@ -81,17 +96,17 @@ module.exports = {
 
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./src/index.html",
+            template: './src/index.html',
             filename: 'index.html'
         }),
 
         new MiniCssExtractPlugin({
-            filename: "[name].css",
-            chunkFilename: "[id].css"
+            filename: '[name].css',
+            chunkFilename: '[id].css'
         }),
 
         // 清除前次打包文件的插件
-        new CleanWebpackPlugin(['build']),
+        new CleanWebpackPlugin(),
 
         // new PrettierPlugin({
         //     printWidth: 80,               // Specify the length of line that the printer will wrap on.
