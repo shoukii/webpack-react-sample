@@ -1,6 +1,7 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var MiniCssExtractPlugin = require("mini-css-extract-plugin");
-var PrettierPlugin = require("prettier-webpack-plugin");
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var MiniCssExtractPlugin = require('mini-css-extract-plugin')
+var PrettierPlugin = require('prettier-webpack-plugin')
+var CleanWebpackPlugin = require('clean-webpack-plugin')
 
 
 var path = require('path');
@@ -88,6 +89,9 @@ module.exports = {
             filename: "[name].css",
             chunkFilename: "[id].css"
         }),
+
+        // 清除前次打包文件的插件
+        new CleanWebpackPlugin(['build']),
 
         // new PrettierPlugin({
         //     printWidth: 80,               // Specify the length of line that the printer will wrap on.
